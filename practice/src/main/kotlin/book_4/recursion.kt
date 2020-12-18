@@ -3,14 +3,7 @@ package book_4
 import java.math.BigInteger
 
 fun append(s: String, c: Char): String = "$s$c"
-
-fun toString(list: List<Char>): String {
-    tailrec fun toString(list: List<Char>, s: String): String =
-        if (list.isEmpty()) s
-        else toString(list.subList(1, list.size), append(s, list[0]))
-
-    return toString(list, "")
-}
+fun prepend(c: Char, s: String): String = "$c$s"
 
 fun sum(n: Int): Int {
     tailrec fun sum(s: Int, i: Int): Int =
@@ -74,16 +67,28 @@ fun string(list: List<Char>): String = foldLeft(list, "", String::plus)
 fun <T> makeString(list: List<T>, delim: String): String =
     foldLeft(list, "") { s, t -> if (s.isEmpty()) "$t" else "$s$delim$t" }
 
+fun toString(list: List<Char>): String =
+    foldRight(list = list, z = "") { c, s -> prepend(c = c, s = s) }
+
+fun <T> reverse(list: List<T>): List<T> =
+    foldLeft(list = list, z = listOf(), f = ::prepend)
+fun <T> prepend(list: List<T>, elem: T): List<T> = listOf(elem) + list
+
 fun main4() {
+    val list = listOf(1, 2, 3, 4, 5)
+    println(reverse(list = list))
 //    val fib = fibonacci(index = 1000)
 //    println(fib)
 
-    val s = sum(list = listOf(1, 2, 3, 4, 5))
-    println(s)
-    val str = string(list = listOf('h', 'e', 'l', 'l', 'o'))
-    println(str)
-    val makeString = makeString(list = listOf("h", "e", "l", "l", "o"), delim = "_")
-    println(makeString)
+//    val s = sum(list = listOf(1, 2, 3, 4, 5))
+//    println(s)
+//    val str = string(list = listOf('h', 'e', 'l', 'l', 'o'))
+//    println(str)
+//    val makeString = makeString(list = listOf("h", "e", "l", "l", "o"), delim = "_")
+//    println(makeString)
+//
+//    val toString = toString(list = listOf('h', 'e', 'l', 'l', 'o'))
+//    println(toString)
 //    val add = practice4_1(a = 10, b = 50)
 //    println(add)
 
