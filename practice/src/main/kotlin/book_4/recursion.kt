@@ -74,9 +74,29 @@ fun <T> reverse(list: List<T>): List<T> =
     foldLeft(list = list, z = listOf(), f = ::prepend)
 fun <T> prepend(list: List<T>, elem: T): List<T> = listOf(elem) + list
 
-fun main4() {
-    val list = listOf(1, 2, 3, 4, 5)
-    println(reverse(list = list))
+fun range(start: Int, end: Int): List<Int> {
+    val result: MutableList<Int> = mutableListOf()
+    (start until end).forEach(result::add)
+    return result
+}
+
+fun <T>unfold(seed: T, f: (T) -> T, p: (T) -> Boolean): List<T> {
+    val result: MutableList<T> = mutableListOf()
+    var elem = seed
+    while (p(elem)) {
+        result.add(elem)
+        elem = f(elem)
+    }
+    return result
+}
+
+fun main4_1() {
+    val list = range(start = 1, end = 10)
+    println(list)
+
+//    val list = listOf(1, 2, 3, 4, 5)
+//    println(reverse(list = list))
+
 //    val fib = fibonacci(index = 1000)
 //    println(fib)
 

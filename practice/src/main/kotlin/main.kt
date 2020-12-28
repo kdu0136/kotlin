@@ -1,5 +1,5 @@
-import book_4.main4
+import book_4.main4_2
 
 fun main() {
-    main4()
+    main4_2()
 }
