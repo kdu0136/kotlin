@@ -7,6 +7,7 @@ fun main() {
     }
 }
 
+// CPU 바운드 알고리즘
 fun isPalindrome(word: String): Boolean {
     val lcWord = word.toLowerCase()
     return lcWord == lcWord.reversed()
